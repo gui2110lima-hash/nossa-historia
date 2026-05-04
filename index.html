@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nossa História</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            margin: 0;
+            background-color: #fce4ec;
+            text-align: center;
+            overflow: hidden;
+        }
+
+        #container {
+            padding: 20px;
+            background: white;
+            border-radius: 15px;
+            box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+            width: 85%;
+            max-width: 450px;
+            z-index: 10;
+        }
+
+        .botoes {
+            margin-top: 30px;
+            height: 120px;
+            position: relative;
+        }
+
+        button {
+            padding: 15px 30px;
+            font-size: 18px;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: 0.2s;
+        }
+
+        #btnSim {
+            background-color: #4caf50;
+            color: white;
+        }
+
+        #btnNao {
+            background-color: #f44336;
+            color: white;
+            position: absolute;
+            left: 50%;
+            transform: translateX(10px); /* Começa ao lado do sim */
+        }
+
+        .video-container {
+            width: 100%;
+            margin-top: 20px;
+        }
+        
+        iframe {
+            width: 100%;
+            border-radius: 10px;
+        }
+    </style>
+</head>
+<body>
+
+    <div id="container">
+        <h2 id="pergunta">Você aceita continuar editando essa vida ao meu lado para sempre?</h2>
+        <p id="aviso" style="color: #888; font-size: 14px;"></p>
+        
+        <div class="botoes">
+            <button id="btnSim" onclick="aceitou()">SIM</button>
+            <button id="btnNao" onmouseover="fuga()" onclick="fuga()">NÃO</button>
+        </div>
+    </div>
+
+    <script>
+        let tentativas = 0;
+
+        function fuga() {
+            tentativas++;
+            const btnNao = document.getElementById('btnNao');
+            const aviso = document.getElementById('aviso');
+            const pergunta = document.getElementById('pergunta');
+
+            // Mensagem na 3ª tentativa
+            if (tentativas === 3) {
+                aviso.innerText = "Tem certeza? O botão parece estar com dificuldade de ser clicado...";
+            }
+
+            // Erro na 5ª tentativa
+            if (tentativas >= 5) {
+                pergunta.innerText = "ERRO TÉCNICO: Opção indisponível no momento. Por favor, utilize o botão de confirmação.";
+                aviso.innerText = "";
+                btnNao.style.display = 'none';
+                return;
+            }
+
+            // Lógica de movimentação aleatória
+            const x = Math.random() * (window.innerWidth - btnNao.offsetWidth);
+            const y = Math.random() * (window.innerHeight - btnNao.offsetHeight);
+            
+            btnNao.style.position = 'fixed'; // Muda para fixo para fugir por toda a tela
+            btnNao.style.left = x + 'px';
+            btnNao.style.top = y + 'px';
+        }
+
+        function aceitou() {
+            // Substitua 'ID_DO_VIDEO' pelo ID do seu vídeo no YouTube
+            // Exemplo: se o link é youtube.com/watch?v=12345, o ID é 12345
+            const videoID = "SUO_ID_AQUI"; 
+
+            document.getElementById('container').innerHTML = `
+                <h1>O melhor capítulo começa agora! ❤️</h1>
+                <div class="video-container">
+                    <iframe height="315" 
+                        src="https://www.youtube.com/embed/${videoID}?autoplay=1" 
+                        frameborder="0" 
+                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+                        allowfullscreen>
+                    </iframe>
+                </div>
+                <p style="margin-top:15px;">Mal posso esperar para viver o resto da vida com você.</p>
+            `;
+        }
+    </script>
+</body>
+</html>
