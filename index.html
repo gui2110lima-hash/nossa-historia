@@ -53,7 +53,7 @@
             color: white;
             position: absolute;
             left: 50%;
-            transform: translateX(10px); /* Começa ao lado do sim */
+            transform: translateX(10px);
         }
 
         .video-container {
@@ -61,9 +61,10 @@
             margin-top: 20px;
         }
         
-        iframe {
+        video {
             width: 100%;
             border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.2);
         }
     </style>
 </head>
@@ -71,7 +72,7 @@
 
     <div id="container">
         <h2 id="pergunta">Você aceita continuar editando essa vida ao meu lado para sempre?</h2>
-        <p id="aviso" style="color: #888; font-size: 14px;"></p>
+        <p id="aviso" style="color: #888; font-size: 14px; min-height: 20px;"></p>
         
         <div class="botoes">
             <button id="btnSim" onclick="aceitou()">SIM</button>
@@ -90,10 +91,10 @@
 
             // Mensagem na 3ª tentativa
             if (tentativas === 3) {
-                aviso.innerText = "Tem certeza? O botão parece estar com dificuldade de ser clicado...";
+                aviso.innerText = "Tem certeza? O botão parece estar com dificuldade...";
             }
 
-            // Erro na 5ª tentativa
+            // Erro técnico na 5ª tentativa
             if (tentativas >= 5) {
                 pergunta.innerText = "ERRO TÉCNICO: Opção indisponível no momento. Por favor, utilize o botão de confirmação.";
                 aviso.innerText = "";
@@ -101,31 +102,26 @@
                 return;
             }
 
-            // Lógica de movimentação aleatória
+            // Movimentação aleatória por toda a tela
             const x = Math.random() * (window.innerWidth - btnNao.offsetWidth);
             const y = Math.random() * (window.innerHeight - btnNao.offsetHeight);
             
-            btnNao.style.position = 'fixed'; // Muda para fixo para fugir por toda a tela
+            btnNao.style.position = 'fixed';
             btnNao.style.left = x + 'px';
             btnNao.style.top = y + 'px';
         }
 
         function aceitou() {
-            // Substitua 'ID_DO_VIDEO' pelo ID do seu vídeo no YouTube
-            // Exemplo: se o link é youtube.com/watch?v=12345, o ID é 12345
-            const videoID = "SUO_ID_AQUI"; 
-
+            // Estrutura com vídeo local (mais seguro e profissional)
             document.getElementById('container').innerHTML = `
                 <h1>O melhor capítulo começa agora! ❤️</h1>
                 <div class="video-container">
-                    <iframe height="315" 
-                        src="https://www.youtube.com/embed/${videoID}?autoplay=1" 
-                        frameborder="0" 
-                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
-                        allowfullscreen>
-                    </iframe>
+                    <video width="100%" height="auto" controls autoplay playsinline>
+                        <source src="nossa-historia.mp4" type="video/mp4">
+                        Seu navegador não suporta vídeos.
+                    </video>
                 </div>
-                <p style="margin-top:15px;">Mal posso esperar para viver o resto da vida com você.</p>
+                <p style="margin-top:15px; font-weight: bold;">Mal posso esperar para viver o resto da vida com você.</p>
             `;
         }
     </script>
