@@ -13,7 +13,7 @@
             justify-content: center;
             height: 100vh;
             margin: 0;
-            background-color: #fce4ec;
+            background-color: #fce4ec; /* Rosa suave */
             text-align: center;
             overflow: hidden;
         }
@@ -41,6 +41,7 @@
             border-radius: 8px;
             cursor: pointer;
             transition: 0.2s;
+            font-weight: bold;
         }
 
         #btnSim {
@@ -53,18 +54,28 @@
             color: white;
             position: absolute;
             left: 50%;
-            transform: translateX(10px);
+            transform: translateX(10px); /* Posicionado ao lado do SIM no início */
         }
 
         .video-container {
             width: 100%;
             margin-top: 20px;
+            position: relative;
+            padding-bottom: 56.25%; /* Proporção 16:9 */
+            height: 0;
         }
         
-        video {
+        .video-container iframe {
+            position: absolute;
+            top: 0;
+            left: 0;
             width: 100%;
+            height: 100%;
             border-radius: 10px;
-            box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+        }
+
+        h1, h2 {
+            color: #d81b60;
         }
     </style>
 </head>
@@ -102,7 +113,7 @@
                 return;
             }
 
-            // Movimentação aleatória por toda a tela
+            // Movimentação aleatória por toda a tela após a interação
             const x = Math.random() * (window.innerWidth - btnNao.offsetWidth);
             const y = Math.random() * (window.innerHeight - btnNao.offsetHeight);
             
@@ -112,14 +123,19 @@
         }
 
         function aceitou() {
-            // Estrutura com vídeo local (mais seguro e profissional)
+            // COLOQUE O ID DO SEU VÍDEO DO YOUTUBE ABAIXO
+            // Exemplo: se o link é https://youtu.be/7lqw18VGEtM, o ID é 7lqw18VGEtM
+            const videoID = "7lqw18VGEtM"; 
+
             document.getElementById('container').innerHTML = `
-                <h1>O melhor capítulo começa agora! ❤️</h1>
+                <h1>Um pedacinho da nossa história! ❤️</h1>
                 <div class="video-container">
-                    <video width="100%" height="auto" controls autoplay playsinline>
-                        <source src="nossa-historia.mp4" type="video/mp4">
-                        Seu navegador não suporta vídeos.
-                    </video>
+                    <iframe 
+                        src="https://www.youtube.com/embed/${7lqw18VGEtM}?autoplay=1&rel=0" 
+                        frameborder="0" 
+                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+                        allowfullscreen>
+                    </iframe>
                 </div>
                 <p style="margin-top:15px; font-weight: bold;">Mal posso esperar para viver o resto da vida com você.</p>
             `;
