@@ -13,7 +13,7 @@
             justify-content: center;
             height: 100vh;
             margin: 0;
-            background-color: #fce4ec; /* Rosa suave */
+            background-color: #fce4ec;
             text-align: center;
             overflow: hidden;
         }
@@ -54,14 +54,14 @@
             color: white;
             position: absolute;
             left: 50%;
-            transform: translateX(10px); /* Posicionado ao lado do SIM no início */
+            transform: translateX(10px);
         }
 
         .video-container {
             width: 100%;
             margin-top: 20px;
             position: relative;
-            padding-bottom: 56.25%; /* Proporção 16:9 */
+            padding-bottom: 56.25%;
             height: 0;
         }
         
@@ -100,12 +100,10 @@
             const aviso = document.getElementById('aviso');
             const pergunta = document.getElementById('pergunta');
 
-            // Mensagem na 3ª tentativa
             if (tentativas === 3) {
                 aviso.innerText = "Tem certeza? O botão parece estar com dificuldade...";
             }
 
-            // Erro técnico na 5ª tentativa
             if (tentativas >= 5) {
                 pergunta.innerText = "ERRO TÉCNICO: Opção indisponível no momento. Por favor, utilize o botão de confirmação.";
                 aviso.innerText = "";
@@ -113,7 +111,6 @@
                 return;
             }
 
-            // Movimentação aleatória por toda a tela após a interação
             const x = Math.random() * (window.innerWidth - btnNao.offsetWidth);
             const y = Math.random() * (window.innerHeight - btnNao.offsetHeight);
             
@@ -123,15 +120,14 @@
         }
 
         function aceitou() {
-            // COLOQUE O ID DO SEU VÍDEO DO YOUTUBE ABAIXO
-            // Exemplo: se o link é https://youtu.be/7lqw18VGEtM, o ID é 7lqw18VGEtM
+            // O ID DO SEU VÍDEO
             const videoID = "7lqw18VGEtM"; 
 
             document.getElementById('container').innerHTML = `
                 <h1>Um pedacinho da nossa história! ❤️</h1>
                 <div class="video-container">
                     <iframe 
-                        src="https://www.youtube.com/embed/${7lqw18VGEtM}?autoplay=1&rel=0" 
+                        src="https://www.youtube.com/embed/${videoID}?autoplay=1&rel=0" 
                         frameborder="0" 
                         allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
                         allowfullscreen>
